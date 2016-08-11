@@ -15,14 +15,14 @@
  */  -->
 
 <div>
-  <div data-th-if="${type.equals('tables')}">
+  <div data-th-if="${type.equals('table')}">
     <div class="row">
       <div class="col-md-12">
         <div class="col-md-2">
           <span class="glyphicon glyphicon-list-alt" style="font-size: 3em;"></span>
         </div>
         <div class="col-md-10" style="padding-top: 15px;">
-          <a th:href="'table?fqdn=' + ${table.fqdn}" data-th-text="${table.tableName}"></a>
+          <a th:href="'/table?fqdn=' + ${table.fqdn}" data-th-text="${table.tableName}"></a>
         </div>
       </div>
     </div>

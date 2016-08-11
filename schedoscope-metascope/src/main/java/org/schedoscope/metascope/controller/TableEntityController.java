@@ -362,8 +362,8 @@ public class TableEntityController extends ViewController {
     if (tableEntity == null) {
       return failed();
     }
-
-    return tableEntityService.getLineage(tableEntity);
+    String data = tableEntityService.getLineage(tableEntity); 
+    return data;
   }
 
   /**

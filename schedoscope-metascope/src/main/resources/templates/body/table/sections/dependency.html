@@ -48,7 +48,7 @@
     <div class="col-md-3">
       <form id="lineageForm">
         <input type="hidden" name="fqdn" th:value="${table.fqdn}" />
-        <button class="pull-right btn btn-info" data-toggle="modal" data-target="#lineage" type="button">Show Lineage Graph</button>
+        <button class="pull-right btn btn-info" data-toggle="modal" data-target="#lineage" th:value="${table.fqdn}" type="button">Show Lineage Graph</button>
       </form>
     </div>
   </div>
@@ -68,10 +68,28 @@
         <div class="modal-body" style="margin-right: 0 !important; padding: 0px;">
           <div class="row" style="margin-right: 5px;">
             <div class="col-md-9" style="border-right: #cdcdcd medium solid;">
-              <div id="mynetworkFA"></div>
+              <div id="lineageGraphBig" style="border: #cdcdcd medium solid;"></div>
+              <div id="lineageGraphSmall" style="border: #cdcdcd medium solid;"></div>
+              <div id='controlPanel'>
+			  	<button type="button" class="btn btn-secondary" aria-label="Center" id='zoomOut'>
+			  	<span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
+			  	</button>
+			  	<button type="button" class="btn btn-secondary" aria-label="Center" id='zoomIn'>
+			  	<span class="glyphicon glyphicon-resize-small" aria-hidden="true"></span>
+			  	</button>
+			  	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			  	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			  	<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+			  	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			  	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			  </div>
             </div>
             <div class="col-md-3" style="padding: 5px;">
-              <div id="lineageDetail" style="padding-top: 10px; overflow: auto; max-height: 600px;"></div>
+              <div id="lineageDetail" style="padding-top: 10px; overflow: auto; max-height: 600px;">
+              	<div id="lineageName" style="padding: 5px;"></div>
+              	<table id="lineageTable" class="table table-striped">              
+                </table>
+              </div>
             </div>
           </div>
         </div>

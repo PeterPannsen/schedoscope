@@ -36,6 +36,7 @@ public class LineageUtil {
   @Autowired
   private HTMLUtil util;
 
+  
   public String getLineage(TableEntity tableEntity) {
     Set<TableEntity> lineageRoots = getLineageRoots(tableEntity, new HashSet<TableEntity>());
     ArrayList<LineageNode> visited = new ArrayList<LineageNode>();
@@ -71,20 +72,19 @@ public class LineageUtil {
       tableNode = node;
       level++;
     } else {
-      tableNode = new LineageNode(fqdn, level++, "tables", fqdn);
+      tableNode = new LineageNode(fqdn);
+//      set table details here
+      tableNode.getDetails().setDatabase(tableEntity.getDatabaseName());
+//      tableNode.getDetails().setLastTransformation(tableEntity.getLastTransformation());
     }
-    LineageNode transformationNode = new LineageNode(tableEntity.getTransformationType(), level++, "transformations",
-        fqdn);
-    tableNode.isWiredTo(transformationNode);
     nodes.add(tableNode);
-    nodes.add(transformationNode);
     for (TableDependencyEntity dependencyEntity : tableEntity.getDependencies()) {
       LineageNode dependencyNode = getNode(dependencyEntity, visited);
       if (dependencyNode == null) {
         fqdn = dependencyEntity.getDependencyFqdn();
-        dependencyNode = new LineageNode(fqdn, level, "tables", fqdn);
+        dependencyNode = new LineageNode(fqdn);
       }
-      transformationNode.isWiredTo(dependencyNode);
+      tableNode.isWiredTo(dependencyNode);
       if (!visited.contains(dependencyNode)) {
         visited.add(dependencyNode);
         nodes.addAll(wireDependencies(service.findByFqdn(dependencyEntity.getDependencyFqdn()), dependencyNode, level,

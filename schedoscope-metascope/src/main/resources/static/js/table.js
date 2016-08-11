@@ -29,17 +29,24 @@ $(function() {
     $(this).empty().append(my_options);
     $(this).val(selected);
   }
-
+  
   $('#partitionSelectBox').sort_select_box();
-
   /* GET lineage information on lineage modal open event */
   $('#lineage').on('shown.bs.modal', function(e) {
+	  	var fqdn = $(e.relatedTarget).val();
+	    var fqdnValue = 'fqdn='+$(e.relatedTarget).val();
     $.ajax({
       url : '/table/view/lineage',
       type : 'GET',
-      data : $('#lineageForm').serialize(),
-      success : drawLineage
-    });
+      data : fqdnValue,
+      success : function(data){		
+    	var jsonData = JSON.parse(data);
+		var realData = metaScopeLineageGraph.processData(jsonData);
+		var bigContainer = document.getElementById('lineageGraphBig');
+		var smallContainer = document.getElementById('lineageGraphSmall');
+		metaScopeLineageGraph.doGraph(realData, metaScopeLineageGraph.bigOptions, metaScopeLineageGraph.smallOptions, bigContainer, smallContainer, fqdn);
+      }
+    });   
   });
 
   /* initialize tablesorter plugin */

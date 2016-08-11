@@ -22,21 +22,16 @@ public class LineageNode {
 
   private String label;
   private int id;
-  private int level;
   private List<LineageNode> wiredTo;
-  private String type;
-  private String fqdn;
-
+  private LineageNodeDetails details;
+  
   public LineageNode() {
     this.wiredTo = new ArrayList<LineageNode>();
   }
 
-  public LineageNode(String label, int level, String type, String fqdn) {
+  public LineageNode(String label) {
     this();
     this.label = label;
-    this.level = level;
-    this.type = type;
-    this.fqdn = fqdn;
   }
 
   public String getLabel() {
@@ -55,18 +50,6 @@ public class LineageNode {
     this.id = id;
   }
 
-  public int getLevel() {
-    return level;
-  }
-
-  public int getModifiedLevel() {
-    return getLevel() * 2;
-  }
-
-  public void setLevel(int level) {
-    this.level = level;
-  }
-
   public List<LineageNode> getWiredTo() {
     return wiredTo;
   }
@@ -79,27 +62,6 @@ public class LineageNode {
     this.wiredTo.add(node);
   }
 
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setFqdn(String fqdn) {
-    this.fqdn = fqdn;
-  }
-
-  public String getFqdn() {
-    return fqdn;
-  }
-
-  @Override
-  public String toString() {
-    return id + " " + label + " " + level;
-  }
-
   @Override
   public boolean equals(Object obj) {
     if (!(obj instanceof LineageNode)) {
@@ -108,6 +70,13 @@ public class LineageNode {
       LineageNode node = (LineageNode) obj;
       return label.equals(node.getLabel());
     }
+  }
+  
+  public LineageNodeDetails getDetails() {
+    if (details == null) {
+      this.details = new LineageNodeDetails();
+    }
+    return details;
   }
 
 }

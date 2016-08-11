@@ -76,46 +76,33 @@ public class HTMLUtil {
     return table;
   }
 
+  
   public String convertLineageGraphToVisJsNetwork(List<LineageNode> graph) {
     for (int i = 0; i < graph.size(); i++) {
       LineageNode node = graph.get(i);
       node.setId(i);
-      if (node.getWiredTo().size() == 0) {
-        node.setLevel(maxLevel(graph));
-      }
     }
-    String nodes = "{\n \"nodes\": [\n";
-    String edges = "\n \"edges\": [\n";
+    String nodes = "{\n \"tables\": [\n";
+    String edges = "\n \"dependency\": [\n";
     int nodeCounter = 0;
     int edgeCounter = 0;
     for (LineageNode n : graph) {
       if (nodeCounter > 0) {
         nodes += ", ";
       }
-      nodes += "{\n \"id\": " + n.getId() + ",\n \"label\": \"" + n.getLabel() + "\",\n \"group\": \"" + n.getType()
-          + "\",\n \"level\": " + n.getModifiedLevel() + ",\n \"fqdn\": \"" + n.getFqdn() + "\"\n}";
+      nodes += "{\n \"id\": " + n.getId() + ",\n \"label\": \"" + n.getLabel() + "\"\n}";
       nodeCounter++;
       for (LineageNode d : n.getWiredTo()) {
         if (edgeCounter > 0) {
           edges += ", ";
         }
-        edges += "{\n \"from\": " + n.getId() + ",\n \"to\": " + d.getId() + ",\n \"arrows\": \"from\"\n}";
+        edges += "{\n \"from\": " + d.getId() + ",\n \"to\": " + n.getId() +  "\n}";
         edgeCounter++;
       }
     }
     nodes += "],";
     edges += "]}";
     return nodes + edges;
-  }
-
-  private int maxLevel(List<LineageNode> graph) {
-    int max = -1;
-    for (LineageNode node : graph) {
-      if (node.getLevel() > max) {
-        max = node.getLevel();
-      }
-    }
-    return max;
   }
 
   public String getAboutTime(long ts) {
