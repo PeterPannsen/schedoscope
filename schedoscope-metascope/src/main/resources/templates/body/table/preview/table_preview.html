@@ -30,7 +30,7 @@
               th:onclick="'increaseViewCount(\'' + ${table.fqdn} + '\')'"></a> <span class="pull-right" data-th-text="${table.status}"></span>
                  <form id="lineageForm">
         <input type="hidden" name="fqdn" th:value="${table.fqdn}" />
-        <button class="pull-center btn btn-info" data-toggle="modal" data-target="#lineage" th:value="${table.fqdn}" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+        <button class="pull-center btn btn-info" style='position: relative; right: -15px;' data-toggle="modal" data-target="#lineage" th:value="${table.fqdn}" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
       </form>
           </div>
         </form>
@@ -75,7 +75,6 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 data-th-text="'Lineage Graph: ' + ${table.tableName}" class="modal-title"></h4>
         </div>
         <form id="lineageForm" style="margin-bottom: 0px;">
           <input type="hidden" id="lineageFqdn" name="fqdn" th:value="${table.fqdn}" />
@@ -84,20 +83,15 @@
           <div class="row" style="margin-right: 5px;">
             <div class="col-md-9" style="border-right: #cdcdcd medium solid;">
               <div id="lineageGraphBig" style="border: #cdcdcd medium solid;"></div>
-              <div id="lineageGraphSmall" style="border: #cdcdcd medium solid;"></div>
-              <div id='controlPanel'>
-			  	<button type="button" class="btn btn-secondary" aria-label="Center" id='zoomOut'>
+              <div id='controlPanel' class="col-md-4 offset-md-8" style='position: relative; top: 20px; right: -1050px;' >
+			  	<button type="button" class="btn btn-default" aria-label="Center" id='zoomOut'>
 			  	<span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
 			  	</button>
-			  	<button type="button" class="btn btn-secondary" aria-label="Center" id='zoomIn'>
+			  	<button type="button" class="btn btn-default" aria-label="Center" id='zoomIn'>
 			  	<span class="glyphicon glyphicon-resize-small" aria-hidden="true"></span>
 			  	</button>
-			  	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			  	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			  	<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-			  	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			  	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 			  </div>
+              <div id="lineageGraphSmall" style="border: #cdcdcd medium solid;"></div>
             </div>
             <div class="col-md-3" style="padding: 5px;">
               <div id="lineageDetail" style="padding-top: 10px; overflow: auto; max-height: 600px;">

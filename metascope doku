@@ -1,0 +1,11 @@
+
+The lineage graph provides a visual representation of data lineage information. Navigating this graph, users can get a better understanding of the interrelationships between tables and navigate between them.
+The lineage graph at the top shows all tables, this will help you to understand the connections in the whole system. 
+[screenshot globalview]
+It can be hard to read if you have a specific table in mind, thats why there is another window.
+The bottom graph only shows you the selected node and its neighbours, neighbour in this case means dependency, so you can see only the important nodes. 
+By clicking [glyph expand] You can increase the range of neighbours. 
+For decreasing you have to click [glyph minimize].
+
+
+
